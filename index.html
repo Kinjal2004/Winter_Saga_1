@@ -3,561 +3,387 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Wizardess Winter Saga - Chapter I</title>
+<title>Wizardess Winter Saga - Chapter II</title>
+
 <style>
-    html, body { height:100%; margin:0; padding:0; }
-    body {
-        background: #f2e9d8;
-        color: #2b2b2b;
-        font-family: 'Times New Roman', serif;
-        line-height: 1.7;
-        font-size: 18px;
-        min-height: 100vh;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        border:45px solid transparent;
-        border-image: url("https://images.stockcake.com/public/8/b/2/8b2225ec-71fc-4b29-84a1-fdab699d419e_large/vintage-victorian-frame-stockcake.jpg") 60 round;
-        box-sizing:border-box;
-    }
+html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
 
-    /* ---------- PAGE CONTAINER ---------- */
-    .page {
-        display:none;
-        flex:1;
-        overflow-y:auto;
-        padding:20px 0;
-        max-width:750px;
-        margin:auto;
-        animation:fade 0.6s ease;
-        width:100%;
-    }
-    @keyframes fade { from{opacity:0} to{opacity:1} }
+/* FIXED FRAME */
+body {
+    background:#f2e9d8;
+    color:#2b2b2b;
+    font-family:'Times New Roman', serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:45px solid transparent;
+    border-image:url("https://images.stockcake.com/public/8/b/2/8b2225ec-71fc-4b29-84a1-fdab699d419e_large/vintage-victorian-frame-stockcake.jpg") 60 round;
+    box-sizing:border-box;
+}
 
-    /* ---------- MUSIC BUTTON ---------- */
-    #musicToggle {
-        position:fixed;
-        top:12px; right:12px;
-        padding:8px 14px; font-size:16px;
-        cursor:pointer;
-        background:#d7c7ab; border:2px solid #b79f7d; border-radius:6px;
-        z-index:1000;
-    }
+/* PAGE WRAPPER */
+#frame {
+    width:100%;
+    max-width:800px;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-    /* ---------- TITLE ---------- */
-    #titlePage h1 {
-        font-size:42px;
-        text-align:center;
-        margin-top:2vh;
-        text-shadow:1px 1px 2px #bba;
-    }
-    #titleImage {
-        display:block;
-        margin: 3vh auto 10px auto;
-        width:120px;
-        max-width:60%;
-    }
+/* PAGE */
+.page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    animation: fade 0.6s ease;
+    justify-content: center;
+    align-items: center;
+}
 
-    /* ---------- STORY BOX ---------- */
-    .chapter-box {
-        background:#fff8ee;
-        padding:25px;
-        border:2px solid #d4c8b8;
-        margin-top:10vh;
-        border-radius:8px;
-        box-shadow: inset 0 0 20px rgba(0,0,0,0.08), 0 0 10px rgba(0,0,0,0.1);
-    }
+.page.active { 
+    display: flex; 
+}
 
-    .centered-image {
-        display:block;
-        margin:18px auto;
-        max-width:60%;
-    }
+@keyframes fade { 
+    from { opacity: 0 } 
+    to { opacity: 1 } 
+}
 
-    /* ---------- GAME AREA ---------- */
-    #gameArea {
-        position:relative;
-        width:100%;
-        height:300px;
-        background:#f7efe0;
-        border:2px solid #c9b79d;
-        border-radius:8px;
-        overflow:hidden;
-        margin-top:20px;
-        box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-        cursor: url("./sprites/hammer.png") 16 16, auto; /* hammer by default */
-    }
+/* SCROLLABLE CONTENT BOX */
+.chapter-box {
+    background: linear-gradient(
+        to bottom,
+        #fffaf2 0%,
+        #fff5e6 100%
+    );
+    border: 2px solid #d4c8b8;
+    border-radius: 10px;
+    padding: 32px 36px;
 
-    /* enemy specifics */
-    #enemy {
-        position:absolute;
-        width:90px; height:90px;
-        object-fit:contain;
-        image-rendering: pixelated;
-        transition: transform 0.1s;
-        z-index:5;
-        /* default enemy cursor fallback */
-        cursor: crosshair;
-    }
+    max-height: 82vh;
+    overflow-y: auto;
+    width: 85%;
 
-    /* override cursor when hovering enemy: red crosshair image */
-    #enemy:hover {
-        cursor: url("./sprites/red_crosshair.png") 16 16, crosshair;
-    }
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 20px;
+    line-height: 1.9;
+    letter-spacing: 0.25px;
+    text-align: justify;
 
-    #counter {
-        font-size:20px;
-        margin-top:15px;
-        font-weight:bold;
-        text-align:center;
-        text-shadow:1px 1px 1px #fff;
-    }
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.08),
+        0 10px 22px rgba(0,0,0,0.15);
+}
 
-    #nextBtn {
-        margin:30px auto;
-        display:block;
-        padding:12px 18px;
-        font-size:18px;
-        background:#d7c7ab;
-        border:2px solid #b79f7d;
-        border-radius:6px;
-        cursor:pointer;
-        box-shadow:0 0 6px rgba(0,0,0,0.2);
-    }
 
-    /* ---------- MOBILE ---------- */
-    @media (max-width:600px) {
-        body { font-size:16px; border-width:20px; }
-        #titlePage h1 { font-size:32px; }
-        #enemy { width:48px; height:48px; }
-        #gameArea { height:250px; }
-    }
+/* IMAGES */
+.centered-image {
+    display:block;
+    margin:20px auto;
+    max-width:60%;
+}
+
+/* BUTTONS */
+button {
+    padding:10px 16px;
+    font-size:18px;
+    background:#d7c7ab;
+    border:2px solid #b79f7d;
+    border-radius:6px;
+    cursor:pointer;
+    box-shadow:0 0 6px rgba(0,0,0,0.2);
+    margin:10px;
+}
+
+/* MUSIC TOGGLE */
+#musicToggle {
+    position:fixed;
+    top:12px;
+    right:12px;
+    z-index:1000;
+}
+
+/* DIAL GAME */
+#dialContainer {
+    width:220px;
+    height:220px;
+    margin:30px auto;
+    border-radius:50%;
+    border:6px solid #b79f7d;
+    background:#f7efe0;
+    position:relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.15);
+}
+
+#dial {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius:50%;
+    transition:transform 0.3s ease;
+}
+
+.dial-number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center center;
+    font-weight: bold;
+    translate: -50% -50%;
+}
+
+#indicator {
+    text-align:center;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+#tryText {
+    text-align:center;
+    color:#8b0000;
+    display:none;
+    font-weight:bold;
+}
+
+@media (max-width:600px) {
+    body { border-width:20px; }
+}
 </style>
 </head>
+
 <body>
 
-<button id="musicToggle" onclick="toggleMusic()">🔊 Music</button>
+<button id="musicToggle">🔊 Music</button>
 
-<!-- =============== TITLE PAGE =============== -->
-<div id="titlePage" class="page" style="display:block;">
-    <img src="sprites/snowflake.gif" id="titleImage" alt="Snowflake" />
-    <h1>Wizardess Winter Saga - Chapter I</h1>
+<div id="frame">
+
+<!-- PAGE 0 -->
+<div id="page0" class="page active">
+    <div class="chapter-box" style="text-align:center;">
+        <img src="sprites1/snowflake.gif" class="centered-image">
+        <h1>Wizardess Winter Saga</h1>
+        <h2>Chapter II</h2>
+    </div>
 </div>
 
-<!-- =============== INTRO PAGE =============== -->
-<!-- =============== INTRO PAGE (drop-in) =============== -->
-<div id="text1" class="page">
+<!-- PAGE 1 -->
+<div id="page1" class="page">
     <div class="chapter-box">
-      <p>
-        Winter hadn't come yet; the forest seemed to be trapped in an <strong>eternal loop of summers</strong>.  
-        All the trees and creatures of the forest were in distress. A <strong>large red dragon</strong>, along with its minions, had taken over the castle that sat atop the hill skirting the woods.
-      </p>
-  
-      <p>
-        One of the minions had <strong>stolen the winter clothes</strong> of all the animals in a single night, and another kept <strong>stealing the ice</strong> whenever it formed on the lake at the heart of the forest.  
-        The dragon also spewed fumes every now and then, and had begun taking <strong>small forest animals as its feast</strong>.
-      </p>
-  
-      <p>
-        Irritated and frightened by all this, the creatures of the forest sent an <strong>embassy to the Wizardess</strong>, who promised to take prompt action.
-      </p>
-  
-      <p>
-        The Wizardess couldn't stand the plight of the animals and trees. Determined to help, she decided to <strong>investigate the matter herself</strong>.  
-        Armed with her <strong>trusty hat</strong>, her <strong>royal violet cloak</strong>, and the <strong>old wand</strong>, she set out for the hill.
-      </p>
-  
-      <img src="sprites/wizardess.gif" class="centered-image" alt="Wizardess" />
-  
-      <p>
-        During her journey she was heartbroken by what the forest had become — <strong>a land of heat and rot</strong>.  
-        Her favourite squirrels were crying in distress; the dragon had taken <strong>one of their family members</strong> as food. She comforted them and promised to do something about it.
-      </p>
-  
-      <p>
-        Determined, she began climbing the mountain. She could have flown, of course — but she wanted to <strong>conserve her energy</strong> for whatever awaited her ahead.  
-        After a difficult and increasingly warmer climb, she reached the top, and there she saw...
-      </p>
-    </div>
-  </div>
-  
+    <p>
+        The Wizardess hurried down the stairs, her muscles <strong>tense and aching</strong> from being tied up for so long.
+        <strong>Exhaustion weighed on her</strong>, yet her mind stayed alert. She wondered what awaited her next,
+        and how quickly she could reach <strong>Dread</strong> and <strong>put an end to him</strong>.
+    </p>
 
-<!-- =============== DRAGON PAGE =============== -->
-<div id="dragonPage" class="page">
+    <p>
+        As she passed through the hallway, a sudden <strong>glow of fire</strong> washed across the stone walls.
+        She caught sight of <strong>Dread’s flame</strong> and instantly ducked below the window.
+        She did not want him to know that <strong>she was free</strong>.
+    </p>
+
+    <img src="sprites1/dragon_fire.gif" class="centered-image">
+
+    <p>
+        Reaching the bottom of the stairs, she stopped before a <strong>heavy wooden door</strong> that led to the next level.
+        She could make out <strong>nothing</strong> from the darkness beyond.
+        Carefully, she <strong>pushed the door open</strong>, and stepped inside.
+    </p>
+</div>
+
+    
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
     <div class="chapter-box">
-        <img src="sprites/Castle_With_Dragon.gif" class="centered-image" alt="Castle with Dragon" />
+        <img src="sprites1/mirah_turns.gif" class="centered-image">
+    
         <p>
-            A <strong>big red dragon</strong> sat behind the castle, its <strong>glistening eyes</strong> scanning the forest below.  
-            Its <strong>scaly skin</strong> shimmered with heat, and its <strong>ominous wings</strong> stretched wide as it roared and spewed thick fumes into the air.  
-            The Wizardess ducked behind a rock, carefully observing the creature. It was clearly keeping watch over the entire forest, a sentinel of chaos.
-          </p>
-          
-          <p>
-            She planned to distract it and cast a <strong>freeze spell</strong> — a bold strategy, but perhaps the only one that could weaken the beast.  
-            Yet just as the idea fully formed in her mind, a sudden wave of <strong>piercing cold</strong> washed over her.
-          </p>
-          
-          <p>
-            And then — <strong>boom</strong> — everything went dark.
-          </p>
-          
-    </div>
-</div>
-
-<!-- =============== MOJITO MONSTER PAGE =============== -->
-<div id="mojitoIntro" class="page">
-    <div class="chapter-box">
+            As her eyes adjusted to the dim light, she noticed a large, almirah-like figure lying on its back
+            in the center of the room. Its surface glinted faintly, catching whatever little light crept in
+            through the cracks in the stone. <strong>It must be Mirah, Dread’s second minion</strong>, she thought to herself.
+        </p>
+    
         <p>
-            When she awoke, she found herself in the <strong>topmost chamber of the castle</strong>.<br>
-            Out of thin air, a strange <strong>glass-like creature</strong> appeared — its shimmering body packed with chunks of ice,
-            and a lemon sticking absurdly out of its brim.<br>
-            The Wizardess narrowed her eyes. “This must be the minion who has been stealing the lake’s ice,” she thought.
-          </p>
-          
-          <p>
-            As if reading her mind, the creature began to speak:<br>
-            <em><strong>
-              “I am the Mojito Monster. I, along with my partner Mirah, under my master Dread the Dragon,
-              have come to destroy the forest and its dwellers. You can do nothing to me — for my master has crafted me from <strong>moonlit glass</strong>,
-              and I am invincible!”
-            </strong></em>
-          </p>
-          
-          <img src="sprites/mojito.png" class="centered-image" alt="Mojito Monster" />
-          
-          <p>
-            The Wizardess was a person of few words.<br>
-            The moment she heard the phrase <strong>moonlit glass</strong>, she remembered her studies.<br>
-            Without hesitation, she shouted, <strong>“Crankler!”</strong><br>
-            At once, her wand transformed into a gleaming hammer.
-          </p>
-          
-          <img src="sprites/wand-hammer.gif" class="centered-image" alt="Wand Hammer" />
-          
-          <p>
-            Only <strong>three strikes</strong> of this enchanted hammer could shatter moonlit glass —  
-            but the Mojito Monster was swift, darting across the chamber at <strong>lightning speed</strong>.
-          </p>
-          
+            No sooner had the thought crossed her mind than the figure began to move.
+            Mirah turned slowly, and she finally saw him clearly — a <strong>blue, glassy frame</strong>,
+            worn and <strong>rustic in appearance</strong>, as though he had been shaped by years of cold and neglect.
+            For a brief moment, he stood still, as if measuring her.
+        </p>
+    
+        <p>
+            Suddenly, Mirah <strong>darted toward the Wizardess</strong> with surprising speed.
+            Instinct took over. She recalled the <strong>trusty Devio spell</strong> without hesitation
+            and hurled it straight at him. The spell struck true, and in an instant,
+            Mirah was <strong>swept aside</strong>, crashing hard against the stone floor.
+        </p>
+    
+        <img src="sprites1/mirah_devio.gif" class="centered-image">
+    
+        <p>
+            With a heavy <strong>clunk</strong>, Mirah landed on his back once more.
+            His oblong shape betrayed him now — he struggled, but could not rise.
+            As he lay there helpless, his voice echoed through the chamber,
+            thick with mockery and confidence.
+        </p>
+    
+        <p>
+            “You cannot stop this,” he said. “Winter will never return to this forest.
+            All the clothes we stole from the creatures of the woods — they are <strong>inside me</strong>.”
+        </p>
+    
+        <p>
+            The Wizardess paid little heed to his bleak words.
+            While Mirah continued to speak, she knelt beside him and got to work,
+            carefully sliding her <strong>hairpin into the rotational lock</strong> set deep within his frame.
+            Whatever he was hiding, she intended to free it and end his part in Dread’s plans.
+        </p>
     </div>
+    
 </div>
 
-<!-- =============== GAME PAGE =============== -->
-<div id="puzzlePage" class="page">
+<!-- PAGE 3 GAME -->
+<div id="page3" class="page">
     <div class="chapter-box">
-        <h2 style="text-align:center;">Take Control: Hit the Mojito Monster</h2>
+        <p style="text-align:center;">
+            Turn the dial.  
+            Whenever you hear a <strong>click</strong>, try opening!
+        </p>
 
-        <div id="gameArea" aria-label="Game arena">
-            <!-- moving enemy (use the mojito gif for movement if you prefer) -->
-            <img id="enemy" src="sprites/mojito.gif" alt="Mojito Monster" />
+        <div id="dialContainer">
+            <div id="dial"></div>
         </div>
 
-        <div id="counter">Hits: 0 / 3</div>
-        <button id="skipBtn" style="
-        margin:20px auto;
-        display:block;
-        padding:10px 16px;
-        font-size:18px;
-        background:#d7c7ab;
-        border:2px solid #b79f7d;
-        border-radius:6px;
-        cursor:pointer;
-        box-shadow:0 0 6px rgba(0,0,0,0.2);
-        ">Skip →</button>
+        <div style="text-align:center;">
+            <button onclick="rotateDial(-36)">⟲</button>
+            <button onclick="rotateDial(36)">⟳</button>
+            <button onclick="tryOpen()">Open</button>
+        </div>
 
+        <div id="indicator">Top Number: ?</div>
+        <div id="tryText">Try again…</div>
     </div>
 </div>
 
-<!-- =============== FINAL PAGE =============== -->
-<div id="finalPage" class="page">
-    <div class="chapter-box">
-        <h2 style="text-align:center;">The Mojito Monster Falls</h2>
-
+<!-- PAGE 4 FINAL -->
+<div id="page4" class="page">
+    <div class="chapter-box" style="text-align:center;">
+        <img src="sprites1/unlocked_mirah.png" class="centered-image">
         <p>
-            With the final strike of the enchanted hammer, the Mojito Monster shattered into 
-            glittering fragments of moonlit glass. The chamber filled with a brief, icy shimmer 
-            before falling silent once more.
+            The lock yielded.  
+            All the clothes spilled out of Mirah, and he lay there, dumbfounded and silent.
+            Leaving him behind, the Wizardess rushed ahead, her resolve clear,
+            for she meant to reach Dread and put an end to him.
+            <br><br>
+            <strong>—— End of Chapter II ——</strong>
         </p>
-
-        <p>
-            Wasting no time, the Wizardess pushed through the creaking door and 
-            descended swiftly into the <strong>lower levels of the castle</strong>…  
-            for she knew this was only the beginning, and far greater dangers lurked below.
-        </p>
+        
     </div>
 </div>
 
-
-<!-- NEXT BUTTON -->
-<button id="nextBtn" onclick="nextPage()">Next →</button>
+</div>
 
 <script>
-/* ----------------- Globals & audio control (Option 1: stop previous audio on page change) ----------------- */
-let currentPage = 0;
-const pages = ["titlePage", "text1", "dragonPage", "mojitoIntro", "puzzlePage", "finalPage"];
-let currentBgAudio = null;
-let pageInterval = null; // used for dragon/mojito repeated plays
-let musicOn = false;
+/* AUDIO */
+let musicOn=false;
+let currentAudio=null;
 
-/* Preload important audio objects (do not auto-play without user interaction in some browsers) */
-const audioFiles = {
-    title: new Audio("music/title_page_bg.mp3"),
-    intro: new Audio("music/intro_page.mp3"),
-    dragon_roar: new Audio("music/dragon_roar.mp3"),
-    mojito_loop: new Audio("music/mojito_monster.mp3"),
-    game_bg: new Audio("music/game_page_bg.mp3"),
-    monster_hit: new Audio("music/monster_hit.mp3"),
-    level_pass: new Audio("music/level_pass.mp3")
-};
-// set loop for ambient tracks where appropriate
-audioFiles.title.loop = true;
-audioFiles.intro.loop = true;
-audioFiles.game_bg.loop = true;
-
-/* music toggle (global on/off for BG audio) */
-function toggleMusic() {
-    musicOn = !musicOn;
-    const btn = document.getElementById("musicToggle");
-    btn.textContent = musicOn ? "🔇 Mute" : "🔊 Music";
-    if (musicOn) {
-        // play current bg if any
-        if (currentBgAudio) currentBgAudio.play().catch(()=>{});
-    } else {
-        if (currentBgAudio) currentBgAudio.pause();
-    }
-}
-
-/* helper to stop page interval and background audio */
-function stopPageIntervalAndBg() {
-    if (pageInterval) {
-        clearInterval(pageInterval);
-        pageInterval = null;
-    }
-    if (currentBgAudio) {
-        try { currentBgAudio.pause(); currentBgAudio.currentTime = 0; } catch(e){}
-        currentBgAudio = null;
-    }
-}
-
-/* play background audio for a page (Option 1): stops previous */
-function playPageAudio(audioObj, options = {}) {
-    // options: { repeatEveryMs: number } for repeated short sounds
-    stopPageIntervalAndBg();
-
-    if (!audioObj) return;
-
-    if (options.repeatEveryMs) {
-        // play immediately once, then set interval to play again every X ms
-        if (musicOn) audioObj.play().catch(()=>{});
-        pageInterval = setInterval(() => {
-            // create a fresh play (some browsers need clone to overlap)
-            let a = audioObj.cloneNode();
-            a.play().catch(()=>{});
-        }, options.repeatEveryMs);
-        // keep reference so that toggleMusic/pause can handle the immediate instance
-        currentBgAudio = audioObj;
-    } else {
-        currentBgAudio = audioObj;
-        if (musicOn) {
-            currentBgAudio.play().catch(()=>{});
-        }
-    }
-}
-
-/* ----------------- Page navigation ----------------- */
-function nextPage() {
-    // hide current
-    document.getElementById(pages[currentPage]).style.display = "none";
-    currentPage++;
-    if (currentPage >= pages.length) currentPage = pages.length - 1;
-    const nextPageId = pages[currentPage];
-    document.getElementById(nextPageId).style.display = "block";
-
-    // Hide next button on game page
-    if (nextPageId === "puzzlePage") {
-    nextBtn.style.display = "none";
-} 
-else if (nextPageId === "finalPage") {
-    nextBtn.style.display = "none";  // permanently hide
-} 
-else {
-    nextBtn.style.display = "block";
-}
-
-
-    // handle audio for each page (Option 1)
-    if (nextPageId === "titlePage") {
-        playPageAudio(audioFiles.title);
-    } else if (nextPageId === "text1") {
-        playPageAudio(audioFiles.intro);
-    } else if (nextPageId === "dragonPage") {
-        // play dragon roar every 3 seconds
-        playPageAudio(audioFiles.dragon_roar, { repeatEveryMs: 3000 });
-    } else if (nextPageId === "mojitoIntro") {
-        // play mojito monster sound every 3 seconds
-        playPageAudio(audioFiles.mojito_loop, { repeatEveryMs: 3000 });
-    } else if (nextPageId === "puzzlePage") {
-        // game bg loops (continuous) - start if musicOn
-        playPageAudio(audioFiles.game_bg);
-    } else if (nextPageId === "finalPage") {
-        // no bg required, but keep it explicit
-        stopPageIntervalAndBg();
-    }
-}
-
-/* Start initial page audio (title) only after user interacts with toggle or navigation.
-   Many browsers block autoplay; we honor that by only playing if musicOn is true.
-*/
-document.addEventListener("DOMContentLoaded", () => {
-    // show initial page already visible in HTML (titlePage)
-    // currentPage stays 0
-    // if user hasn't toggled music, don't play auto (respect browser policies)
-});
-
-/* ----------------- GAME LOGIC ----------------- */
-const enemy = document.getElementById("enemy");
-const gameArea = document.getElementById("gameArea");
-let counter = 0;
-let movementInterval = null;
-
-function startEnemyMovement() {
-    if (movementInterval) clearInterval(movementInterval);
-    movementInterval = setInterval(() => {
-        const areaWidth = gameArea.clientWidth - enemy.clientWidth;
-        const areaHeight = gameArea.clientHeight - enemy.clientHeight;
-        const x = Math.random() * Math.max(0, areaWidth);
-        const y = Math.random() * Math.max(0, areaHeight);
-        enemy.style.transform = `translate(${x}px, ${y}px)`;
-    }, 700);
-}
-
-function stopEnemyMovement() {
-    if (movementInterval) { clearInterval(movementInterval); movementInterval = null; }
-}
-
-// When entering puzzlePage, ensure movement starts and game audio is playing
-// We'll observe page changes by checking display state when nextPage called; but also
-// start movement if user lands on puzzlePage via other means:
-function initGamePageIfVisible() {
-    const puzzlePageEl = document.getElementById("puzzlePage");
-    if (puzzlePageEl.style.display !== "none") {
-        startEnemyMovement();
-    } else {
-        stopEnemyMovement();
-    }
-}
-
-// click/tap on enemy
-enemy.addEventListener("click", () => {
-    // play hit sound (fresh clone to avoid blocking overlapping)
-    try {
-        let s = audioFiles.monster_hit.cloneNode();
-        s.play().catch(()=>{});
-    } catch (e) {}
-
-    counter++;
-    document.getElementById("counter").textContent = `Hits: ${counter} / 3`;
-
-    // small visual "pop"
-    enemy.style.transform += " scale(0.95)";
-    setTimeout(() => {
-        // remove scale by resetting transform (we'll keep translate)
-        enemy.style.transform = enemy.style.transform.replace(" scale(0.95)", "");
-    }, 100);
-
-    if (counter >= 3) {
-        // play level pass sound then move to final page
-        try {
-            let pass = audioFiles.level_pass.cloneNode();
-            pass.play().catch(()=>{});
-        } catch (e) {}
-        // stop enemy movement and bg audio
-        stopEnemyMovement();
-        stopPageIntervalAndBg();
-
-        // show final page
-        document.getElementById("puzzlePage").style.display = "none";
-        const finalId = "finalPage";
-        document.getElementById(finalId).style.display = "block";
-        // update currentPage index to final
-        currentPage = pages.indexOf(finalId);
-        // show next button (or hide if you want)
-        document.getElementById("nextBtn").style.display = "block";
-    }
-});
-
-/* When switching pages via nextPage, we already handle audio; ensure we start/stop movement */
-const originalNext = window.nextPage;
-window.nextPage = function() {
-    originalNext();
-    initGamePageIfVisible();
+const sounds={
+    title:new Audio("music1/title_page_bg.mp3"),
+    roar:new Audio("music1/dragon_roar.mp3"),
+    mirah:new Audio("music1/turning_mirah.mp3"),
+    game:new Audio("music1/game_page.mp3"),
+    click:new Audio("music1/click.mp3"),
+    pass:new Audio("music1/level_pass.mp3")
 };
 
-/* Also ensure pressing Next from initial load triggers proper audio if user toggles music */
-function ensureInitialAudioIfMusicOn() {
-    if (musicOn && currentBgAudio) currentBgAudio.play().catch(()=>{});
+sounds.title.loop=true;
+sounds.game.loop=true;
+
+function playAudio(a){
+    if(currentAudio){currentAudio.pause(); currentAudio.currentTime=0;}
+    currentAudio=a;
+    if(musicOn) a.play().catch(()=>{});
 }
 
-/* Prevent starting audio before user interacts: when user clicks the Music button, start current page audio */
-document.getElementById("musicToggle").addEventListener("click", () => {
-    // If currentBgAudio is set (e.g., title), start it
-    const visiblePageId = pages[currentPage];
-    // ensure page audio selection consistent with visible page
-    if (visiblePageId === "titlePage") playPageAudio(audioFiles.title);
-    else if (visiblePageId === "text1") playPageAudio(audioFiles.intro);
-    else if (visiblePageId === "dragonPage") playPageAudio(audioFiles.dragon_roar, { repeatEveryMs: 3000 });
-    else if (visiblePageId === "mojitoIntro") playPageAudio(audioFiles.mojito_loop, { repeatEveryMs: 3000 });
-    else if (visiblePageId === "puzzlePage") playPageAudio(audioFiles.game_bg);
-});
+/* MUSIC TOGGLE */
+document.getElementById("musicToggle").onclick=()=>{
+    musicOn=!musicOn;
+    document.getElementById("musicToggle").textContent=musicOn?"🔇 Mute":"🔊 Music";
+    if(musicOn && currentAudio) currentAudio.play().catch(()=>{});
+    if(!musicOn && currentAudio) currentAudio.pause();
+};
 
-/* Make sure when user manually navigates back/forward (if you later add controls) we clean up intervals
-   For now, also stop intervals when page is hidden using visibilitychange (optional)
-*/
-document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-        // pause background audio when tab hidden
-        if (currentBgAudio) currentBgAudio.pause();
-    } else {
-        if (musicOn && currentBgAudio) currentBgAudio.play().catch(()=>{});
+/* FIRST INTERACTION STARTS TITLE MUSIC */
+document.body.addEventListener("pointerdown", ()=>{
+    if(!currentAudio){
+        playAudio(sounds.title);
     }
+},{once:true});
+
+/* PAGE NAV */
+let page=0;
+const pages=[...document.querySelectorAll(".page")];
+
+function showPage(i){
+    pages[page].classList.remove("active");
+    page=i;
+    pages[page].classList.add("active");
+
+    if(page===0) playAudio(sounds.title);
+    if(page===1) playAudio(sounds.roar);
+    if(page===2) playAudio(sounds.mirah);
+    if(page===3) playAudio(sounds.game);
+}
+
+document.body.addEventListener("click",e=>{
+    if(e.target.tagName==="BUTTON") return;
+    if(page<3) showPage(page+1);
 });
 
-/* Initialize: show title page; other pages hidden */
-document.addEventListener("DOMContentLoaded", () => {
-    // initial page already visible: titlePage
-    // no audio auto-play (respecting Option 1 & browser autoplay)
-    currentPage = 0;
-    // prepare enemy movement but start only when game page becomes visible
-    initGamePageIfVisible();
-});
+/* DIAL */
+const dial=document.getElementById("dial");
+let rotation=0;
 
-// --- SKIP BUTTON LOGIC ---
-const skipBtn = document.getElementById("skipBtn");
-skipBtn.addEventListener("click", () => {
+for(let i=1;i<=10;i++){
+    const n=document.createElement("div");
+    n.className="dial-number";
+    n.textContent=i;
+    n.style.transform=`rotate(${i*36}deg) translate(0,-95px) rotate(-${i*36}deg)`;
+    dial.appendChild(n);
+}
 
-    // Play level complete sound
-    try {
-        let pass = audioFiles.level_pass.cloneNode();
-        pass.play().catch(()=>{});
-    } catch(e){}
+function topNumber(){
+    return ((Math.round(-rotation/36)%10)+10)%10 || 10;
+}
 
-    // Stop monster movement if running
-    stopEnemyMovement();
+function rotateDial(d){
+    rotation+=d;
+    dial.style.transform=`rotate(${rotation}deg)`;
+    if(topNumber()===7){
+        sounds.click.cloneNode().play();
+    }
+    document.getElementById("indicator").textContent="Top Number: "+topNumber();
+}
 
-    // Switch to final page
-    document.getElementById("puzzlePage").style.display = "none";
-    document.getElementById("finalPage").style.display = "block";
-
-    // Update page index
-    currentPage = pages.indexOf("finalPage");
-
-    // Remove NEXT button permanently
-    document.getElementById("nextBtn").style.display = "none";
-});
-
-
+function tryOpen(){
+    if(topNumber()===7){
+        sounds.pass.play();
+        showPage(4);
+    } else {
+        document.getElementById("tryText").style.display="block";
+        setTimeout(()=>document.getElementById("tryText").style.display="none",1200);
+    }
+}
 </script>
+
 </body>
 </html>
-
