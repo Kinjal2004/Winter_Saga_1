@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Wizardess Winter Saga - Chapter II</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wizardess Winter Saga – Chapter III</title>
 
 <style>
-html, body {
-    height:100%;
+html,body{
     margin:0;
     padding:0;
+    height:100%;
+    background:#f2e9d8;
+    font-family:'Times New Roman', serif;
 }
 
-/* FIXED FRAME */
-body {
-    background:#f2e9d8;
-    color:#2b2b2b;
-    font-family:'Times New Roman', serif;
+body{
     display:flex;
     justify-content:center;
     align-items:center;
@@ -25,136 +23,56 @@ body {
     box-sizing:border-box;
 }
 
-/* PAGE WRAPPER */
-#frame {
+#frame{
     width:100%;
-    max-width:800px;
+    max-width:900px;
     height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-/* PAGE */
-.page {
-    display: none;
-    width: 100%;
-    height: 100%;
-    padding: 30px 0;
-    animation: fade 0.6s ease;
-    justify-content: center;
-    align-items: center;
+.page{
+    display:none;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+    animation:fade .6s ease;
 }
 
-.page.active { 
-    display: flex; 
+.page.active{ display:flex; }
+
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
 }
 
-@keyframes fade { 
-    from { opacity: 0 } 
-    to { opacity: 1 } 
+.chapter-box{
+    background:linear-gradient(#fffaf2,#fff5e6);
+    border:2px solid #d4c8b8;
+    border-radius:10px;
+    padding:36px;
+    width:85%;
+    max-height:82vh;
+    overflow-y:auto;
+    box-shadow:inset 0 0 25px rgba(0,0,0,.08),
+               0 10px 22px rgba(0,0,0,.15);
+    font-size:20px;
+    line-height:1.9;
 }
 
-/* SCROLLABLE CONTENT BOX */
-.chapter-box {
-    background: linear-gradient(
-        to bottom,
-        #fffaf2 0%,
-        #fff5e6 100%
-    );
-    border: 2px solid #d4c8b8;
-    border-radius: 10px;
-    padding: 32px 36px;
-
-    max-height: 82vh;
-    overflow-y: auto;
-    width: 85%;
-
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-    font-size: 20px;
-    line-height: 1.9;
-    letter-spacing: 0.25px;
-    text-align: justify;
-
-    box-shadow:
-        inset 0 0 25px rgba(0,0,0,0.08),
-        0 10px 22px rgba(0,0,0,0.15);
-}
-
-
-/* IMAGES */
-.centered-image {
+.centered-image{
     display:block;
-    margin:20px auto;
+    margin:22px auto;
     max-width:60%;
 }
 
-/* BUTTONS */
-button {
-    padding:10px 16px;
-    font-size:18px;
-    background:#d7c7ab;
-    border:2px solid #b79f7d;
-    border-radius:6px;
-    cursor:pointer;
-    box-shadow:0 0 6px rgba(0,0,0,0.2);
-    margin:10px;
-}
-
-/* MUSIC TOGGLE */
-#musicToggle {
+#musicToggle{
     position:fixed;
     top:12px;
     right:12px;
     z-index:1000;
-}
-
-/* DIAL GAME */
-#dialContainer {
-    width:220px;
-    height:220px;
-    margin:30px auto;
-    border-radius:50%;
-    border:6px solid #b79f7d;
-    background:#f7efe0;
-    position:relative;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.15);
-}
-
-#dial {
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
-    border-radius:50%;
-    transition:transform 0.3s ease;
-}
-
-.dial-number {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-origin: center center;
-    font-weight: bold;
-    translate: -50% -50%;
-}
-
-#indicator {
-    text-align:center;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-#tryText {
-    text-align:center;
-    color:#8b0000;
-    display:none;
-    font-weight:bold;
-}
-
-@media (max-width:600px) {
-    body { border-width:20px; }
 }
 </style>
 </head>
@@ -165,223 +83,262 @@ button {
 
 <div id="frame">
 
-<!-- PAGE 0 -->
-<div id="page0" class="page active">
-    <div class="chapter-box" style="text-align:center;">
-        <img src="sprites1/snowflake.gif" class="centered-image">
+<!-- TITLE PAGE -->
+<div class="page active">
+    <div class="chapter-box" style="text-align:center">
+        <img src="sprites2/snowflake.gif" class="centered-image">
         <h1>Wizardess Winter Saga</h1>
-        <h2>Chapter II</h2>
+        <h2>Chapter III</h2>
     </div>
 </div>
 
-<!-- PAGE 1 -->
-<div id="page1" class="page">
+<!-- INTRO PAGE -->
+<div class="page">
     <div class="chapter-box">
-    <p>
-        The Wizardess hurried down the stairs, her muscles <strong>tense and aching</strong> from being tied up for so long.
-        <strong>Exhaustion weighed on her</strong>, yet her mind stayed alert. She wondered what awaited her next,
-        and how quickly she could reach <strong>Dread</strong> and <strong>put an end to him</strong>.
-    </p>
-
-    <p>
-        As she passed through the hallway, a sudden <strong>glow of fire</strong> washed across the stone walls.
-        She caught sight of <strong>Dread’s flame</strong> and instantly ducked below the window.
-        She did not want him to know that <strong>she was free</strong>.
-    </p>
-
-    <img src="sprites1/dragon_fire.gif" class="centered-image">
-
-    <p>
-        Reaching the bottom of the stairs, she stopped before a <strong>heavy wooden door</strong> that led to the next level.
-        She could make out <strong>nothing</strong> from the darkness beyond.
-        Carefully, she <strong>pushed the door open</strong>, and stepped inside.
-    </p>
-</div>
-
-    
-</div>
-
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-    <div class="chapter-box">
-        <img src="sprites1/mirah_turns.gif" class="centered-image">
-    
+        <img src="sprites2/castle_stairs.png" class="centered-image">
         <p>
-            As her eyes adjusted to the dim light, she noticed a large, almirah-like figure lying on its back
-            in the center of the room. Its surface glinted faintly, catching whatever little light crept in
-            through the cracks in the stone. <strong>It must be Mirah, Dread’s second minion</strong>, she thought to herself.
+            With the Mirah ordeal taken care of, Wizardess descended the last run of spiral stairs of the old castle.
+            Her footsteps were hushed yet swift. Upon reaching the bottom, she found the main door of the castle locked,
+            but a large window was left unguarded. With little effort, she squeezed herself through the tight space.
+            Once outside under the moonlit sky, she crouched against the castle wall and strategized the spells to use.
+            After meticulous thought, she peeked from behind a column but could not find Dread. Then, almost suddenly,
+            a large flapping sound came from above, mixed with the strange smell of <strong>dragon fire</strong>.
         </p>
-    
+        
+        <img src="sprites2/dragon_flying.gif" class="centered-image">
+        
         <p>
-            No sooner had the thought crossed her mind than the figure began to move.
-            Mirah turned slowly, and she finally saw him clearly — a <strong>blue, glassy frame</strong>,
-            worn and <strong>rustic in appearance</strong>, as though he had been shaped by years of cold and neglect.
-            For a brief moment, he stood still, as if measuring her.
-        </p>
-    
-        <p>
-            Suddenly, Mirah <strong>darted toward the Wizardess</strong> with surprising speed.
-            Instinct took over. She recalled the <strong>trusty Devio spell</strong> without hesitation
-            and hurled it straight at him. The spell struck true, and in an instant,
-            Mirah was <strong>swept aside</strong>, crashing hard against the stone floor.
-        </p>
-    
-        <img src="sprites1/mirah_devio.gif" class="centered-image">
-    
-        <p>
-            With a heavy <strong>clunk</strong>, Mirah landed on his back once more.
-            His oblong shape betrayed him now — he struggled, but could not rise.
-            As he lay there helpless, his voice echoed through the chamber,
-            thick with mockery and confidence.
-        </p>
-    
-        <p>
-            “You cannot stop this,” he said. “Winter will never return to this forest.
-            All the clothes we stole from the creatures of the woods — they are <strong>inside me</strong>.”
-        </p>
-    
-        <p>
-            The Wizardess paid little heed to his bleak words.
-            While Mirah continued to speak, she knelt beside him and got to work,
-            carefully sliding her <strong>hairpin into the rotational lock</strong> set deep within his frame.
-            Whatever he was hiding, she intended to free it and end his part in Dread’s plans.
-        </p>
-    </div>
-    
-</div>
-
-<!-- PAGE 3 GAME -->
-<div id="page3" class="page">
-    <div class="chapter-box">
-        <p style="text-align:center;">
-            Turn the dial.  
-            Whenever you hear a <strong>click</strong>, try opening!
-        </p>
-
-        <div id="dialContainer">
-            <div id="dial"></div>
-        </div>
-
-        <div style="text-align:center;">
-            <button onclick="rotateDial(-36)">⟲</button>
-            <button onclick="rotateDial(36)">⟳</button>
-            <button onclick="tryOpen()">Open</button>
-        </div>
-
-        <div id="indicator">Top Number: ?</div>
-        <div id="tryText">Try again…</div>
-    </div>
-</div>
-
-<!-- PAGE 4 FINAL -->
-<div id="page4" class="page">
-    <div class="chapter-box" style="text-align:center;">
-        <img src="sprites1/unlocked_mirah.png" class="centered-image">
-        <p>
-            The lock yielded.  
-            All the clothes spilled out of Mirah, and he lay there, dumbfounded and silent.
-            Leaving him behind, the Wizardess rushed ahead, her resolve clear,
-            for she meant to reach Dread and put an end to him.
-            <br><br>
-            <strong>—— End of Chapter II ——</strong>
+            She ducked down on instinct and looked up. A bright red streak flew across the sky against glistening, yet faded,
+            stars. Dread’s massive wings flapped as he patrolled the castle from above. He must have sensed that something
+            was amiss and alas, he noticed the Wizardess crouching behind the column. In an instant, he plunged toward her
+            in fiery rage.
         </p>
         
     </div>
 </div>
 
+<!-- STORY PAGE -->
+<div class="page">
+    <div class="chapter-box">
+        <p>
+            The dragon breathed huge flames and hurled them at the Wizardess. The wand came to her hands swiftly, and she
+            summoned a <strong>frost envelope </strong>to protect herself from the fire. Once Dread took a brief pause from his vulgar conduct,
+            she seized the opportunity to hurl an ice ball at him, forcing him to back off. They continued fighting in this manner,
+            and as time progressed, both Dread and the Wizardess began to grow weary.
+        </p>
+        
+        <img src="sprites2/dragon_hitting.gif" class="centered-image">
+        
+        <p>
+            One of the squirrels, kept for Dread’s feast along with the Wizardess, stepped onto the castle’s terrace when the door
+            was found unlocked. Curious, she climbed onto the wall and noticed the Wizardess fighting below. Without wasting any
+            further time, she called upon the other trapped animals and helped <strong> hoist the old cannon</strong> that had once stood atop the
+            terrace wall in earlier times.
+        </p>        
+    </div>
 </div>
 
+<!-- GAME PAGE -->
+<div class="page">
+    <div class="chapter-box">
+
+        <p style="text-align:center">
+            <strong> Aid Wizardess in defeating Dread </strong> <br>
+            Rotate the Cannon and Fire <br>
+            (You have multiple shots)
+        </p>
+
+        <!-- GAME CONTAINER -->
+        <div id="game" style="
+            position:relative;
+            width:100%;
+            height:50vh;
+            background:linear-gradient(rgb(92, 56, 56),#f78f8f);
+            border-bottom:4px solid #555;
+            overflow:hidden;
+        ">
+            <img id="cannon" src="sprites2/cannon.png" style="
+                position:absolute;
+                left:10px;
+                bottom:10px;
+                width:50px;
+                transform-origin:20% 50%;
+                transform:rotate(-45deg);
+            ">
+
+            <img id="ball" src="sprites2/cannon_ball.png" style="
+                position:absolute;
+                width:18px;
+                display:none;
+            ">
+
+            <img id="dragon" src="sprites2/sitting_dragon.gif" style="
+                position:absolute;
+                right:10px;
+                bottom:10px;
+                width:50px;
+            ">
+        </div>
+
+        <div style="text-align:center;margin-top:10px">
+            <button onclick="rotate(-5)">⟳</button>
+            <button onclick="rotate(5)">⟲</button>
+            <button onclick="fire()">🔥 Fire</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page">
+    <div class="chapter-box" style="text-align:center">
+        <img src="sprites2/win_screen.gif" class="centered-image">
+        <p>
+            Winter breathed once more through the forest.  
+            The dragon lay defeated. Wizardess didn’t linger for long; after a brief
+            salute to the little animals atop the castle,
+            she levitated and flew back to her chambers in the little hut.
+            <br><br>
+            <strong>Merry Christmas, dear Reader.</strong><br>
+            <em>Thank you for your patience and time ❤️.</em>
+        </p>        
+    </div>
+</div>
+
+</div>
+
+<audio id="titleMusic" src="music2/title_page_bg.mp3" loop></audio>
+<audio id="introMusic" src="music2/game_page.mp3" loop></audio>
+<audio id="dragonFlap" src="music2/dragon_flap.mp3"></audio>
+<audio id="roar" src="music2/dragon_roar.mp3"></audio>
+<audio id="gameBG" src="music2/dragon_game.mp3" loop></audio>
+<audio id="shot" src="music2/cannon_shot.mp3"></audio>
+<audio id="win" src="music2/winning_music.mp3"></audio>
+
 <script>
-/* AUDIO */
-let musicOn=false;
-let currentAudio=null;
-
-const sounds={
-    title:new Audio("music1/title_page_bg.mp3"),
-    roar:new Audio("music1/dragon_roar.mp3"),
-    mirah:new Audio("music1/turning_mirah.mp3"),
-    game:new Audio("music1/game_page.mp3"),
-    click:new Audio("music1/click.mp3"),
-    pass:new Audio("music1/level_pass.mp3")
-};
-
-sounds.title.loop=true;
-sounds.game.loop=true;
-
-function playAudio(a){
-    if(currentAudio){currentAudio.pause(); currentAudio.currentTime=0;}
-    currentAudio=a;
-    if(musicOn) a.play().catch(()=>{});
-}
-
-/* MUSIC TOGGLE */
-document.getElementById("musicToggle").onclick=()=>{
-    musicOn=!musicOn;
-    document.getElementById("musicToggle").textContent=musicOn?"🔇 Mute":"🔊 Music";
-    if(musicOn && currentAudio) currentAudio.play().catch(()=>{});
-    if(!musicOn && currentAudio) currentAudio.pause();
-};
-
-/* FIRST INTERACTION STARTS TITLE MUSIC */
-document.body.addEventListener("pointerdown", ()=>{
-    if(!currentAudio){
-        playAudio(sounds.title);
-    }
-},{once:true});
-
-/* PAGE NAV */
-let page=0;
+/* ---------- PAGE SYSTEM ---------- */
 const pages=[...document.querySelectorAll(".page")];
+let page=0;
 
 function showPage(i){
     pages[page].classList.remove("active");
     page=i;
     pages[page].classList.add("active");
-
-    if(page===0) playAudio(sounds.title);
-    if(page===1) playAudio(sounds.roar);
-    if(page===2) playAudio(sounds.mirah);
-    if(page===3) playAudio(sounds.game);
+    handleAudio();
 }
 
-document.body.addEventListener("click",e=>{
-    if(e.target.tagName==="BUTTON") return;
-    if(page<3) showPage(page+1);
+const GAME_PAGE_INDEX = 3; // change to your actual index
+
+document.body.addEventListener("click", e => {
+    if (e.target.tagName === "BUTTON") return;
+    if (page === GAME_PAGE_INDEX) return; // ⛔ stop auto-navigation
+
+    if (page < pages.length - 1) {
+        showPage(page + 1);
+    }
 });
 
-/* DIAL */
-const dial=document.getElementById("dial");
-let rotation=0;
+/* ---------- AUDIO ---------- */
+let audioUnlocked = false;
+let musicOn=true;
+let current=null;
 
-for(let i=1;i<=10;i++){
-    const n=document.createElement("div");
-    n.className="dial-number";
-    n.textContent=i;
-    n.style.transform=`rotate(${i*36}deg) translate(0,-95px) rotate(-${i*36}deg)`;
-    dial.appendChild(n);
+const audio={
+    title:titleMusic,
+    intro:introMusic,
+    flap:dragonFlap,
+    roar:roar,
+    game:gameBG,
+    win:win
+};
+
+function play(a){
+    if(current){ current.pause(); current.currentTime=0; }
+    current=a;
+    if(musicOn) a.play().catch(()=>{});
 }
 
-function topNumber(){
-    return ((Math.round(-rotation/36)%10)+10)%10 || 10;
+function handleAudio(){
+    if(page===0) play(audio.title);
+    if(page===1){ play(audio.intro); audio.flap.play(); }
+    if(page===2){ play(audio.roar); }
+    if(page===3){ play(audio.game); audio.game.volume=0.4; }
+    if(page===4){ play(audio.win); audio.win.loop=false; }
 }
 
-function rotateDial(d){
-    rotation+=d;
-    dial.style.transform=`rotate(${rotation}deg)`;
-    if(topNumber()===7){
-        sounds.click.cloneNode().play();
+musicToggle.onclick=()=>{
+    musicOn=!musicOn;
+    musicToggle.textContent=musicOn?"🔇 Mute":"🔊 Music";
+    if(musicOn && current) current.play();
+    if(!musicOn && current) current.pause();
+};
+
+document.body.addEventListener("pointerdown", () => {
+    if (!audioUnlocked) {
+        audioUnlocked = true;
+        play(audio.title);
     }
-    document.getElementById("indicator").textContent="Top Number: "+topNumber();
+}, { once: true });
+
+
+/* ---------- GAME LOGIC ---------- */
+let angle = 45, cooldown = false, over = false;
+const g = 9.81, scale = 5;
+
+// choose breakpoint (px)
+let v = window.innerWidth >= 768 ? 35 : 25;
+
+
+function rotate(d){
+    if(over) return;
+    angle=Math.max(0,Math.min(90,angle+d));
+    cannon.style.transform=`rotate(${-angle}deg)`;
 }
 
-function tryOpen(){
-    if(topNumber()===7){
-        sounds.pass.play();
-        showPage(4);
-    } else {
-        document.getElementById("tryText").style.display="block";
-        setTimeout(()=>document.getElementById("tryText").style.display="none",1200);
-    }
+function fire(){
+    if(cooldown||over) return;
+    cooldown=true; setTimeout(()=>cooldown=false,1200);
+    shot.currentTime=0; shot.play();
+
+    const c=cannon.getBoundingClientRect();
+    const gRect=game.getBoundingClientRect();
+    const cx=c.left+c.width*0.2;
+    const cy=c.top+c.height/2;
+
+    const rad=angle*Math.PI/180;
+    const bx=cx+Math.cos(rad)*c.width*0.75-gRect.left;
+    const by=cy-Math.sin(rad)*c.width*0.75-gRect.top;
+
+    let t=0;
+    ball.style.display="block";
+
+    (function anim(){
+        t+=0.05;
+        ball.style.left=bx+v*Math.cos(rad)*t*scale+"px";
+        ball.style.top=by-(v*Math.sin(rad)*t-.5*g*t*t)*scale+"px";
+
+        if(hit()){
+            over=true;
+            ball.style.display="none";
+            setTimeout(()=>showPage(4),500);
+            return;
+        }
+        requestAnimationFrame(anim);
+    })();
+}
+
+function hit(){
+    const b=ball.getBoundingClientRect();
+    const d=dragon.getBoundingClientRect();
+    const HIT_PADDING = 20;
+
+    return !(
+      b.right  < d.left + HIT_PADDING ||
+      b.left   > d.right - HIT_PADDING ||
+      b.bottom < d.top + HIT_PADDING ||
+      b.top    > d.bottom - HIT_PADDING
+);
+
 }
 </script>
 

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wizardess Winter Saga - Chapter II</title>
+
+<style>
+html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+/* FIXED FRAME */
+body {
+    background:#f2e9d8;
+    color:#2b2b2b;
+    font-family:'Times New Roman', serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:45px solid transparent;
+    border-image:url("https://images.stockcake.com/public/8/b/2/8b2225ec-71fc-4b29-84a1-fdab699d419e_large/vintage-victorian-frame-stockcake.jpg") 60 round;
+    box-sizing:border-box;
+}
+
+/* PAGE WRAPPER */
+#frame {
+    width:100%;
+    max-width:800px;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* PAGE */
+.page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    animation: fade 0.6s ease;
+    justify-content: center;
+    align-items: center;
+}
+
+.page.active { 
+    display: flex; 
+}
+
+@keyframes fade { 
+    from { opacity: 0 } 
+    to { opacity: 1 } 
+}
+
+/* SCROLLABLE CONTENT BOX */
+.chapter-box {
+    background: linear-gradient(
+        to bottom,
+        #fffaf2 0%,
+        #fff5e6 100%
+    );
+    border: 2px solid #d4c8b8;
+    border-radius: 10px;
+    padding: 32px 36px;
+
+    max-height: 82vh;
+    overflow-y: auto;
+    width: 85%;
+
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 20px;
+    line-height: 1.9;
+    letter-spacing: 0.25px;
+    text-align: justify;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.08),
+        0 10px 22px rgba(0,0,0,0.15);
+}
+
+
+/* IMAGES */
+.centered-image {
+    display:block;
+    margin:20px auto;
+    max-width:60%;
+}
+
+/* BUTTONS */
+button {
+    padding:10px 16px;
+    font-size:18px;
+    background:#d7c7ab;
+    border:2px solid #b79f7d;
+    border-radius:6px;
+    cursor:pointer;
+    box-shadow:0 0 6px rgba(0,0,0,0.2);
+    margin:10px;
+}
+
+/* MUSIC TOGGLE */
+#musicToggle {
+    position:fixed;
+    top:12px;
+    right:12px;
+    z-index:1000;
+}
+
+/* DIAL GAME */
+#dialContainer {
+    width:220px;
+    height:220px;
+    margin:30px auto;
+    border-radius:50%;
+    border:6px solid #b79f7d;
+    background:#f7efe0;
+    position:relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.15);
+}
+
+#dial {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius:50%;
+    transition:transform 0.3s ease;
+}
+
+.dial-number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center center;
+    font-weight: bold;
+    translate: -50% -50%;
+}
+
+#indicator {
+    text-align:center;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+#tryText {
+    text-align:center;
+    color:#8b0000;
+    display:none;
+    font-weight:bold;
+}
+
+@media (max-width:600px) {
+    body { border-width:20px; }
+}
+</style>
+</head>
+
+<body>
+
+<button id="musicToggle">🔊 Music</button>
+
+<div id="frame">
+
+<!-- PAGE 0 -->
+<div id="page0" class="page active">
+    <div class="chapter-box" style="text-align:center;">
+        <img src="sprites1/snowflake.gif" class="centered-image">
+        <h1>Wizardess Winter Saga</h1>
+        <h2>Chapter II</h2>
+    </div>
+</div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+    <div class="chapter-box">
+    <p>
+        The Wizardess hurried down the stairs, her muscles <strong>tense and aching</strong> from being tied up for so long.
+        <strong>Exhaustion weighed on her</strong>, yet her mind stayed alert. She wondered what awaited her next,
+        and how quickly she could reach <strong>Dread</strong> and <strong>put an end to him</strong>.
+    </p>
+
+    <p>
+        As she passed through the hallway, a sudden <strong>glow of fire</strong> washed across the stone walls.
+        She caught sight of <strong>Dread’s flame</strong> and instantly ducked below the window.
+        She did not want him to know that <strong>she was free</strong>.
+    </p>
+
+    <img src="sprites1/dragon_fire.gif" class="centered-image">
+
+    <p>
+        Reaching the bottom of the stairs, she stopped before a <strong>heavy wooden door</strong> that led to the next level.
+        She could make out <strong>nothing</strong> from the darkness beyond.
+        Carefully, she <strong>pushed the door open</strong>, and stepped inside.
+    </p>
+</div>
+
+    
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <div class="chapter-box">
+        <img src="sprites1/mirah_turns.gif" class="centered-image">
+    
+        <p>
+            As her eyes adjusted to the dim light, she noticed a large, almirah-like figure lying on its back
+            in the center of the room. Its surface glinted faintly, catching whatever little light crept in
+            through the cracks in the stone. <strong>It must be Mirah, Dread’s second minion</strong>, she thought to herself.
+        </p>
+    
+        <p>
+            No sooner had the thought crossed her mind than the figure began to move.
+            Mirah turned slowly, and she finally saw him clearly — a <strong>blue, glassy frame</strong>,
+            worn and <strong>rustic in appearance</strong>, as though he had been shaped by years of cold and neglect.
+            For a brief moment, he stood still, as if measuring her.
+        </p>
+    
+        <p>
+            Suddenly, Mirah <strong>darted toward the Wizardess</strong> with surprising speed.
+            Instinct took over. She recalled the <strong>trusty Devio spell</strong> without hesitation
+            and hurled it straight at him. The spell struck true, and in an instant,
+            Mirah was <strong>swept aside</strong>, crashing hard against the stone floor.
+        </p>
+    
+        <img src="sprites1/mirah_devio.gif" class="centered-image">
+    
+        <p>
+            With a heavy <strong>clunk</strong>, Mirah landed on his back once more.
+            His oblong shape betrayed him now — he struggled, but could not rise.
+            As he lay there helpless, his voice echoed through the chamber,
+            thick with mockery and confidence.
+        </p>
+    
+        <p>
+            “You cannot stop this,” he said. “Winter will never return to this forest.
+            All the clothes we stole from the creatures of the woods — they are <strong>inside me</strong>.”
+        </p>
+    
+        <p>
+            The Wizardess paid little heed to his bleak words.
+            While Mirah continued to speak, she knelt beside him and got to work,
+            carefully sliding her <strong>hairpin into the rotational lock</strong> set deep within his frame.
+            Whatever he was hiding, she intended to free it and end his part in Dread’s plans.
+        </p>
+    </div>
+    
+</div>
+
+<!-- PAGE 3 GAME -->
+<div id="page3" class="page">
+    <div class="chapter-box">
+        <p style="text-align:center;">
+            Turn the dial.  
+            Whenever you hear a <strong>click</strong>, try opening!
+        </p>
+
+        <div id="dialContainer">
+            <div id="dial"></div>
+        </div>
+
+        <div style="text-align:center;">
+            <button onclick="rotateDial(-36)">⟲</button>
+            <button onclick="rotateDial(36)">⟳</button>
+            <button onclick="tryOpen()">Open</button>
+        </div>
+
+        <div id="indicator">Top Number: ?</div>
+        <div id="tryText">Try again…</div>
+    </div>
+</div>
+
+<!-- PAGE 4 FINAL -->
+<div id="page4" class="page">
+    <div class="chapter-box" style="text-align:center;">
+        <img src="sprites1/unlocked_mirah.png" class="centered-image">
+        <p>
+            The lock yielded.  
+            All the clothes spilled out of Mirah, and he lay there, dumbfounded and silent.
+            Leaving him behind, the Wizardess rushed ahead, her resolve clear,
+            for she meant to reach Dread and put an end to him.
+            <br><br>
+            <strong>—— End of Chapter II ——</strong>
+        </p>
+        
+    </div>
+</div>
+
+</div>
+
+<script>
+/* AUDIO */
+let musicOn=false;
+let currentAudio=null;
+
+const sounds={
+    title:new Audio("music1/title_page_bg.mp3"),
+    roar:new Audio("music1/dragon_roar.mp3"),
+    mirah:new Audio("music1/turning_mirah.mp3"),
+    game:new Audio("music1/game_page.mp3"),
+    click:new Audio("music1/click.mp3"),
+    pass:new Audio("music1/level_pass.mp3")
+};
+
+sounds.title.loop=true;
+sounds.game.loop=true;
+
+function playAudio(a){
+    if(currentAudio){currentAudio.pause(); currentAudio.currentTime=0;}
+    currentAudio=a;
+    if(musicOn) a.play().catch(()=>{});
+}
+
+/* MUSIC TOGGLE */
+document.getElementById("musicToggle").onclick=()=>{
+    musicOn=!musicOn;
+    document.getElementById("musicToggle").textContent=musicOn?"🔇 Mute":"🔊 Music";
+    if(musicOn && currentAudio) currentAudio.play().catch(()=>{});
+    if(!musicOn && currentAudio) currentAudio.pause();
+};
+
+/* FIRST INTERACTION STARTS TITLE MUSIC */
+document.body.addEventListener("pointerdown", ()=>{
+    if(!currentAudio){
+        playAudio(sounds.title);
+    }
+},{once:true});
+
+/* PAGE NAV */
+let page=0;
+const pages=[...document.querySelectorAll(".page")];
+
+function showPage(i){
+    pages[page].classList.remove("active");
+    page=i;
+    pages[page].classList.add("active");
+
+    if(page===0) playAudio(sounds.title);
+    if(page===1) playAudio(sounds.roar);
+    if(page===2) playAudio(sounds.mirah);
+    if(page===3) playAudio(sounds.game);
+}
+
+document.body.addEventListener("click",e=>{
+    if(e.target.tagName==="BUTTON") return;
+    if(page<3) showPage(page+1);
+});
+
+/* DIAL */
+const dial=document.getElementById("dial");
+let rotation=0;
+
+for(let i=1;i<=10;i++){
+    const n=document.createElement("div");
+    n.className="dial-number";
+    n.textContent=i;
+    n.style.transform=`rotate(${i*36}deg) translate(0,-95px) rotate(-${i*36}deg)`;
+    dial.appendChild(n);
+}
+
+function topNumber(){
+    return ((Math.round(-rotation/36)%10)+10)%10 || 10;
+}
+
+function rotateDial(d){
+    rotation+=d;
+    dial.style.transform=`rotate(${rotation}deg)`;
+    if(topNumber()===7){
+        sounds.click.cloneNode().play();
+    }
+    document.getElementById("indicator").textContent="Top Number: "+topNumber();
+}
+
+function tryOpen(){
+    if(topNumber()===7){
+        sounds.pass.play();
+        showPage(4);
+    } else {
+        document.getElementById("tryText").style.display="block";
+        setTimeout(()=>document.getElementById("tryText").style.display="none",1200);
+    }
+}
+</script>
+
+</body>
+</html>
